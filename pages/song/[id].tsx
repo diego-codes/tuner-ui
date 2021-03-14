@@ -4,11 +4,7 @@ import { useQuery } from 'react-query'
 import Header from '../../components/Header'
 import SongEmbed from '../../components/SongEmbed'
 import SongPreviewList from '../../components/SongPreviewList'
-import {
-  fetchRecommendations,
-  fetchSimilarSongs,
-  fetchSongs,
-} from '../../services/songs'
+import { fetchSimilarSongs, fetchSongs } from '../../services/songs'
 
 export const Profile = (): JSX.Element => {
   const {

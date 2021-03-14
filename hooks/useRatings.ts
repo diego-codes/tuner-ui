@@ -1,17 +1,17 @@
-import useLocalStorage, { writeStorage } from '@rehooks/local-storage'
 import { Ratings } from '../types/Ratings'
+import useLocalStorage from './useLocalStorage'
 
 export default function useSongRatings(): [
   Record<string, number>,
   (id: string, rating: number) => void
 ] {
-  const [ratings] = useLocalStorage<Ratings>('ratings', {})
+  const [ratings, setRatings] = useLocalStorage<Ratings>('ratings', {})
 
   const setSongRating = (id: string, number: number) => {
-    writeStorage('ratings', {
-      ...ratings,
+    setRatings((r) => ({
+      ...r,
       [id]: number,
-    })
+    }))
   }
 
   return [ratings, setSongRating]
