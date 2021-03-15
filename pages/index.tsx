@@ -41,9 +41,10 @@ export const Home = (): JSX.Element => {
       <h1>Welcome to Tuner</h1>
       <Description>
         Rate songs that you like and dislike to get song recommendations. Search
-        for songs or rate the small selection below. If you do not know or
-        remember the song, you can listen to a Spotify preview (may require a
-        Spotify account for some).
+        for specific songs or rate any song in the &ldquo;Songs to get you
+        started&rdquo; section below. If you do not know or remember the song,
+        you can listen to a Spotify preview (may require a Spotify account for
+        some).
       </Description>
       <Description>
         Once you have some ratings, you can head over to the{' '}

@@ -39,7 +39,7 @@ export const Recommendations = (): JSX.Element => {
       <Header />
 
       <SongPreviewList
-        heading="Most similar songs to you likes"
+        heading="Most similar songs to your likes"
         songs={recommenedSongs}
         isLoading={songsIsLoading || recommendationsIsLoading}
         description={
