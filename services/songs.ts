@@ -7,10 +7,15 @@ export const fetchSongs = (): Promise<Song[]> =>
     .get(`${process.env.NEXT_PUBLIC_API_URL}/songs/`)
     .then(({ data }) => data)
 
-export const fetchRecommendations = (ratings: Ratings): Promise<string[]> =>
+export const fetchRecommendations = (
+  ratings: Ratings
+): Promise<{ similar: string[]; percentile: string[] }> =>
   axios
     .post(`${process.env.NEXT_PUBLIC_API_URL}/songs/recommendation`, ratings)
-    .then(({ data }) => data.map((song: Song) => song.id))
+    .then(({ data }) => ({
+      similar: data.similar.map((song: Song) => song.id),
+      percentile: data.percentile.map((song: Song) => song.id),
+    }))
 
 export const fetchSimilarSongs = (id: string): Promise<string[]> =>
   axios

@@ -1,13 +1,29 @@
 import { FC } from 'react'
 import Link from 'next/link'
+import styled from 'styled-components'
+
+const Container = styled.header`
+  background-color: gainsboro;
+  padding: 1em;
+  font-weight: 400;
+`
+
+const NavItem = styled.div`
+  display: inline-block;
+  margin-right: 1em;
+`
 
 const Header: FC = () => (
-  <header>
+  <Container>
     <nav>
-      <Link href="/">Home</Link>
-      <Link href="/profile">My profile</Link>
+      <NavItem>
+        <Link href="/">Home</Link>
+      </NavItem>
+      <NavItem>
+        <Link href="/recommendations">Recommendations</Link>
+      </NavItem>
     </nav>
-  </header>
+  </Container>
 )
 
 export default Header

@@ -1,11 +1,14 @@
-import Link from 'next/link'
 import { ChangeEventHandler, FC } from 'react'
 import styled, { css } from 'styled-components'
 import { Song } from '../types/Song'
-import SongEmbed from './SongEmbed'
+import EmbedToggle from './EmbedToggle'
+import Artist from './Artist'
+import SongTitle from './SongTitle'
 
 const Container = styled.div`
-  margin-bottom: 1.5em;
+  box-sizing: border-box;
+  border: 1px solid lightgray;
+  padding: 1em 0.5em;
 `
 const Input = styled.input`
   height: 1px;
@@ -18,11 +21,14 @@ const Input = styled.input`
 `
 
 const InputLabel = styled.label<{ checked: boolean; hasRating: boolean }>`
+  box-sizing: border-box;
   position: relative;
   margin-right: 0.4em;
   padding: 0.2em 1em;
   cursor: pointer;
   border: 1px solid ${({ checked }) => (checked ? 'gray' : 'lightgray')};
+  flex: 1;
+  text-align: center;
 
   ${({ hasRating }) =>
     hasRating &&
@@ -40,22 +46,23 @@ const FieldSet = styled.fieldset`
   margin: 0;
   padding: 0;
   border: 0;
+  display: flex;
+  width: 100%;
 `
 
 const Details = styled.div`
   margin-bottom: 0.3em;
 `
-const Title = styled.p`
+
+const TitleWrapper = styled.h3`
   margin: 0;
-  margin-bottom: 0.1em;
-  font-size: 1.8em;
+  margin-bottom: 0.2em;
+  font-size: 1em;
   text-transform: capitalize;
 `
 
-const Artist = styled.p`
-  margin: 0;
-  font-size: 1em;
-  text-transform: capitalize;
+const EmbedContainer = styled.div`
+  margin-bottom: 0.3em;
 `
 
 type SongPreviewProps = {
@@ -76,14 +83,14 @@ const SongPreview: FC<SongPreviewProps> = ({
   return (
     <Container>
       <Details>
-        <Link href={`/song/${song.id}`}>
-          <a>
-            <Title>{song.title}</Title>
-            <Artist>{song.artist}</Artist>
-          </a>
-        </Link>
+        <TitleWrapper>
+          <SongTitle id={song.id}>{song.title}</SongTitle>
+        </TitleWrapper>
+        <Artist>{song.artist}</Artist>
       </Details>
-      <SongEmbed id={song.id} />
+      <EmbedContainer>
+        <EmbedToggle id={song.id} />
+      </EmbedContainer>
 
       <FieldSet>
         <InputLabel checked={rating === 1} hasRating={!!rating}>

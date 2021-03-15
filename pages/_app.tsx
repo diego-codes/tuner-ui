@@ -1,12 +1,17 @@
 import { AppProps } from 'next/app'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import GlobalStyles from '../components/GlobalStyles'
+import { SongRatingsContextProvider } from '../hooks/useRatings'
 
 const queryClient = new QueryClient()
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
+      <GlobalStyles />
+      <SongRatingsContextProvider>
+        <Component {...pageProps} />
+      </SongRatingsContextProvider>
     </QueryClientProvider>
   )
 }

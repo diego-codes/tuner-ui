@@ -2,10 +2,17 @@ import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
 import { useQuery } from 'react-query'
 import Header from '../../components/Header'
-import SongEmbed from '../../components/SongEmbed'
 import SongPreviewList from '../../components/SongPreviewList'
 import { fetchSimilarSongs, fetchSongs } from '../../services/songs'
+import SpotifyEmbed from '../../components/SpotifyEmbed'
+import Artist from '../../components/Artist'
+import SongTitle from '../../components/SongTitle'
+import styled from 'styled-components'
+import Footer from '../../components/Footer'
 
+const Title = styled.h1`
+  margin-bottom: 0em;
+`
 export const Profile = (): JSX.Element => {
   const {
     query: { id },
@@ -34,12 +41,15 @@ export const Profile = (): JSX.Element => {
       <Header />
       {song && (
         <>
-          <h1>{song.title}</h1>
-          <p>{song.artist}</p>
-          <SongEmbed id={song.id} />
+          <Title>
+            <SongTitle>{song.title}</SongTitle>
+          </Title>
+          <Artist>{song.artist}</Artist>
+          <SpotifyEmbed id={song.id} />
         </>
       )}
       <SongPreviewList heading="Most similar songs" songs={similarSongs} />
+      <Footer />
     </div>
   )
 }

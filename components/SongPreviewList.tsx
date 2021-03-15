@@ -1,27 +1,55 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import styled from 'styled-components'
-import useSongRatings from '../hooks/useRatings'
+import { useSongRatings } from '../hooks/useRatings'
 import { Song } from '../types/Song'
 import SongPreview from './SongPreview'
 
 const SongsContainer = styled.div`
   display: grid;
-  grid-auto-rows: 1fr;
-  grid-template-columns: repeat(auto-fill, 300px);
+  grid-template-columns: repeat(auto-fill, 320px);
   gap: 2em;
 `
+
+const Title = styled.h1`
+  margin-bottom: 0em;
+`
+
+const SubTitle = styled.h4`
+  margin: 0;
+  margin-bottom: 2em;
+`
+
 type SongPreviewListProps = {
   songs?: Song[]
   heading: string
+  isLoading?: boolean
+  description?: ReactNode
 }
-const SongPreviewList: FC<SongPreviewListProps> = ({ songs = [], heading }) => {
-  const [ratings, setSongRating] = useSongRatings()
+const SongPreviewList: FC<SongPreviewListProps> = ({
+  songs = [],
+  heading,
+  description,
+  isLoading,
+}) => {
+  const { ratings, addRating } = useSongRatings()
+
+  const getSubTitle = () => {
+    if (isLoading) {
+      return 'Loading songs...'
+    }
+
+    if (songs.length === 0) {
+      return 'No songs to display'
+    }
+
+    return `Displaying ${songs.length} songs`
+  }
+
   return (
     <div>
-      <header>
-        <h2>{heading}</h2>
-        <p>Displaying {songs.length} songs</p>
-      </header>
+      <Title>{heading}</Title>
+      {description}
+      <SubTitle>{getSubTitle()}</SubTitle>
 
       <SongsContainer>
         {songs.map((song) => (
@@ -29,7 +57,7 @@ const SongPreviewList: FC<SongPreviewListProps> = ({ songs = [], heading }) => {
             key={song.id}
             song={song}
             rating={ratings[song.id]}
-            onRatingChange={setSongRating}
+            onRatingChange={addRating}
           />
         ))}
       </SongsContainer>

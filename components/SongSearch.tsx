@@ -1,14 +1,30 @@
 import { FC, FormEventHandler, useState } from 'react'
 import styled from 'styled-components'
 
-const Input = styled.input``
+const Container = styled.form`
+  font-size: 1.3em;
+`
+const Input = styled.input`
+  font-size: inherit;
+  margin-right: 0.3em;
+`
+
+const Button = styled.button`
+  font-size: inherit;
+`
+
+const LabelText = styled.div`
+  font-size: 0.9em;
+  margin-bottom: 0.2em;
+`
 
 type SongSearchProps = {
+  initialValue?: string
   onSubmit: (val: string) => void
 }
 
-const SongSearch: FC<SongSearchProps> = ({ onSubmit }) => {
-  const [val, setVal] = useState('')
+const SongSearch: FC<SongSearchProps> = ({ onSubmit, initialValue = '' }) => {
+  const [val, setVal] = useState(initialValue)
 
   const handleSubmit: FormEventHandler = (event) => {
     event.preventDefault()
@@ -16,9 +32,9 @@ const SongSearch: FC<SongSearchProps> = ({ onSubmit }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Container onSubmit={handleSubmit}>
       <label>
-        <div>Search for songs by title or artist:</div>
+        <LabelText>Search for songs by title or artist:</LabelText>
         <Input
           type="search"
           value={val}
@@ -26,8 +42,8 @@ const SongSearch: FC<SongSearchProps> = ({ onSubmit }) => {
           placeholder="eg. Shakira"
         ></Input>
       </label>
-      <button type="submit">Search</button>
-    </form>
+      <Button type="submit">Search</Button>
+    </Container>
   )
 }
 
