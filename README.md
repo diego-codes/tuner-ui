@@ -1,27 +1,35 @@
-# NextJS Typescript Boilerplate
+# Tuner web UI
 
-Bootstrap a developer-friendly NextJS app configured with:
+This web application recommends songs to users based on their ratings.
 
-- [Typescript](https://www.typescriptlang.org/)
-- Linting with [ESLint](https://eslint.org/)
-- Formatting with [Prettier](https://prettier.io/)
-- Linting, typechecking and formatting on by default using [`husky`](https://github.com/typicode/husky) for commit hooks
-- Testing with [Jest](https://jestjs.io/) and [`react-testing-library`](https://testing-library.com/docs/react-testing-library/intro)
+## How to run locally
 
-## Deploy your own
+### Requirements
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+To run this server locally, you will need Node.js version 15+ and npm version 7+ installed.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-typescript-eslint-jest&project-name=with-typescript-eslint-jest&repository-name=with-typescript-eslint-jest)
+### Install dependencies
 
-## How to use
+Install dependencies with the following command:
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-typescript-eslint-jest with-typescript-eslint-jest-app
-# or
-yarn create next-app --example with-typescript-eslint-jest with-typescript-eslint-jest-app
+```
+npm install
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+### Set the API URL environment variable
+
+This application needs to know where to find the API server. To configure this, create an `.env.local` file at the root of the project's directory and add:
+
+```
+NEXT_PUBLIC_API_URL= # Server location. It can be locally running at http://localhost:8000 or the live version at https://dherna20-tuner.herokuapp.com
+```
+
+### Run the application
+
+Finally, you can run the application with the following command:
+
+```
+npm run dev
+```
+
+It will take a few seconds to boot up, but once it is ready, you can access it via your browser at http://localhost:3000.
